@@ -1,7 +1,5 @@
 // Liri.js
 // Author: Tom Keel  2016 06 29
-// v0 - base pgm, allow for parameter input
-// v1 - add spotify processing
 
 //Takes in all of the command line arguments
 var inputString = process.argv;
@@ -11,18 +9,16 @@ var inputString = process.argv;
 var argument1 = inputString[2]; // application ie tweet, spotify
 var argument2 = inputString[3]; // application input argument such as song name
 
-var argument1 = inputString[2]; 
 switch (argument1) {
 
-  case "t":
-  case "tw":
-  case "tweet":
+	case "tw":
+	case "tweet":
   case "my-tweets":
     console.log("my-tweets");
     break;
-	
-  case "s":
+
   case "spot":
+  case "spotify":
   case "spotify-this-song":
     console.log("spotify-this-song");
     console.log("arg2=" + argument2);
@@ -53,14 +49,12 @@ switch (argument1) {
       }  
     })
     break;
-	
-  case "m":
+
   case "mov":
   case "movie-this":
     console.log("movie-this");
     break;
-	
-  case "d":	
+
   case "do":
   case "do-what-it-says":
     console.log("do-what-it-says");
