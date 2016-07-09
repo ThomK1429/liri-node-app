@@ -1,4 +1,5 @@
 var Twitter = require('twitter');
+var numTweets2Print = 20;
  
 
 
@@ -13,18 +14,18 @@ var client = new Twitter({
 var params = {screen_name: '@BrentSpiner'}; 
 client.get('statuses/user_timeline', params, function(error, tweets, response){
   if (!error) {
-     console.log(tweets);
+     //console.log(tweets);
      // console.log(response); // raw data
 
-  /*   for (var i = 0; i < Things.length; i++) {
-     	Things[i]
-     }
+    for (var i = 0; (i < numTweets2Print &&  i < tweets.length - 1); i++) {
+  
     console.log("\n"); 
-    console.log("  Created: " + tweets[0].created_at);
-    console.log("User Name: " + tweets[0].user.name);
-    console.log("     Text: " + tweets[0].text);
-    console.log("\n"); */
+    console.log("  Created: " + tweets[i].created_at);
+    console.log("User Name: " + tweets[i].user.name);
+    console.log("     Text: " + tweets[i].text);
+    console.log("\n");  
    
     // console.log("Tweets: " + JSON.stringify(tweets, null, 2));
+    }
   }
 });
