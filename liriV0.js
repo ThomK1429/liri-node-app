@@ -1,5 +1,6 @@
 // Liri.js
 // Author: Tom Keel  2016 06 29
+// v0 - base pgm, allow for parameter input
 
 //Takes in all of the command line arguments
 var inputString = process.argv;
@@ -9,19 +10,26 @@ var inputString = process.argv;
 var argument1 = inputString[2]; 
 switch (argument1) {
 
-	case "tw":
-	case "tweet":
+  case "t":
+  case "tw":
+  case "tweet":
   case "my-tweets":
     console.log("my-tweets");
     break;
+	
+  case "s":
   case "spot":
   case "spotify-this-song":
     console.log("spotify-this-song");
     break;
+	
+  case "m":
   case "mov":
   case "movie-this":
     console.log("movie-this");
     break;
+	
+  case "d":	
   case "do":
   case "do-what-it-says":
     console.log("do-what-it-says");
