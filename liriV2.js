@@ -1,9 +1,8 @@
 // Liri.js
-// Author: Tom Keel  2016 06 29, due 2016 07 10
+// Author: Tom Keel  2016 06 29
 // v0 - base pgm, allow for parameter input
 // v1 - add npm spotify api (music) processing
 // v2 - add npm OMDB api (movie) processing
-// v3 - add npm twitter api processing
 
 //Takes in all of the command line arguments
 var inputString = process.argv;
@@ -24,17 +23,13 @@ switch (argument2) {
   case "tw":
   case "tweet":
   case "my-tweets":
-    //console.log("my-tweets");
-    if(argument3 == " ") {
-      argument3 = "@BrentSpiner";
-    }
-    twitter(argument3);
+    console.log("my-tweets");
     break;
 	
   case "s":
   case "spot":
   case "spotify-this-song":
-    //console.log("spotify-this-song");    
+    console.log("spotify-this-song");    
     if(argument3 == " ") {
       argument3 = "blink 182 what's my age again";
     }
@@ -46,7 +41,7 @@ switch (argument2) {
   case "m":
   case "mov":
   case "movie-this":
-    //console.log("movie-this");
+    console.log("movie-this");
      if(argument3 == " ") {
       argument3 = "mr nobody";
     }
@@ -66,7 +61,7 @@ switch (argument2) {
 //  -------------------------------------------------------------------------------------
 
 function omdbSearch(arg3){
-  //console.log("omdbSearch has been called");
+  console.log("omdbSearch has been called");
 
  var omdb = require('omdb');
     console.log("\n\n");
@@ -104,6 +99,7 @@ function omdbSearch(arg3){
 
 }
 
+//  -------------------------------------------------------------------------------------
 
 //  -------------------------------------------------------------------------------------
 
@@ -151,45 +147,3 @@ var spotify = require('spotify');
 }
 
 //  -------------------------------------------------------------------------------------
-function twitter(arg3) { 
-var Twitter = require('twitter');
-
-    console.log("\n\n");
-    console.log("              * * * * * * * * * * * * * * * * * * * * * * *");
-    console.log("              *                                           *");
-    console.log("              *               T W I T T E R               *");    
-    console.log("              *                                           *");
-    console.log("              * * * * * * * * * * * * * * * * * * * * * * *");
-    console.log("\n");
-    console.log('  Select Tweets from: ' +  '"' + arg3 + '"' + '\n');
-
-
-var numTweets2Print = 20;
-var client = new Twitter({
-  consumer_key: 'tYc2scNNiV2myT5ZbCun8YPOi',
-  consumer_secret: 'm4VpgLKykwYz7zjcLH4bBfac7GG3Tcx0gx8Tp4OsHNsUk9806C',
-  access_token_key: '750890712443518978-2dZhcv8rr9bYllgvYBwlEMOyi4qn2a9',
-  access_token_secret:'BiO5sWomFlWnSdzPo8Eub6KjhxiASUXw8T3W5hHOsNo1q',
-});
- 
-//var params = {screen_name: 'nodejs'};  
-var params = {screen_name: arg3}; 
-client.get('statuses/user_timeline', params, function(error, tweets, response){
-  if (!error) {
-     //console.log(tweets);
-     // console.log(response); // raw data
-
-    for (var i = 0; (i < numTweets2Print &&  i < tweets.length ); i++) {
-  
-    console.log("\n"); 
-    console.log("  Created: " + tweets[i].created_at);
-    console.log("User Name: " + tweets[i].user.name);
-    console.log("     Text: " + tweets[i].text);
-    console.log("\n");  
-   
-    // console.log("Tweets: " + JSON.stringify(tweets, null, 2));
-    }
-  }
-});
-
-}
