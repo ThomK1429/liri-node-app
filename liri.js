@@ -2,6 +2,7 @@
 // Author: Tom Keel  2016 06 29
 // v0 - base pgm, allow for parameter input
 // v1 - add npm spotify api (music) processing
+// v2 - add npm OMDB api (movie) processing
 
 //Takes in all of the command line arguments
 var inputString = process.argv;
@@ -35,10 +36,16 @@ switch (argument2) {
     spotifySearch(argument3); // song to search
     break;
 	
+  case "o":
+  case "omdb":
   case "m":
   case "mov":
   case "movie-this":
     console.log("movie-this");
+     if(argument3 == " ") {
+      argument3 = "mr nobody";
+    }
+    omdbSearch(argument3);
     break;
 	
   case "d":	
@@ -50,6 +57,49 @@ switch (argument2) {
     console.log("Sorry, " + argument1 + " - do-what-it-says");
 }
 
+
+//  -------------------------------------------------------------------------------------
+
+function omdbSearch(arg3){
+  console.log("omdbSearch has been called");
+
+ var omdb = require('omdb');
+    console.log("\n\n");
+    console.log("              * * * * * * * * * * * * * * * * * * * * * * *");
+    console.log("              *                                           *");
+    console.log("              *           M O V I E  - -  T H I S         *");    
+    console.log("              *                                           *");
+    console.log("              * * * * * * * * * * * * * * * * * * * * * * *");
+    console.log("\n");
+    console.log('  Search for: ' +  '"' + arg3 + '"' + '\n');
+    var optionsx = {
+      tomatoes:true
+    }
+ omdb.get({ title: arg3}, {tomatoes:true}, function(err, movie) {
+ 
+    if(err) {
+        return console.error(err);
+    }
+ 
+    if(!movie) {
+        return console.log('Movie not found!');
+    } 
+    
+    console.log("\n");
+    console.log('   Movie Title: %s ', movie.title);
+    console.log('    Movie Year: %d ', movie.year);
+    console.log('   IMDB Rating: %d/10', movie.imdb.rating);
+    console.log('       Country: %s', movie.countries);
+    console.log('        Actors: ' + movie.actors);
+    console.log('          Plot: ' + movie.plot);
+    console.log("\n");
+    //console.log(JSON.stringify(movie, null, 2));
+    
+ });
+
+}
+
+//  -------------------------------------------------------------------------------------
 
 //  -------------------------------------------------------------------------------------
 
